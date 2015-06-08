@@ -189,8 +189,19 @@ assert((new Klingon()).sayHello(new Romulan()) === 'Jolan\'tru',
 // will test your code)
 //*********************************************************
 
+var fruit = ['cherry', 'banana', 'apple'];
+var sortedFruit = ['banana', 'apple', 'cherry'];
+
 function lastLetterSort(stringArray) {
   function byLastLetter(a, b) {
+    if (a.slice(-1) < b.slice(-1)) {
+      return -1;
+    } else if (a.slice(-1) > b.slice(-1)){
+      return 1;
+    } else {
+      return 0;
+    }
+
     //TODO: implement me. sort the strings in alphabetical
     // order using their last letter
     // Read this about how the sort function works:
@@ -201,20 +212,50 @@ function lastLetterSort(stringArray) {
   }
   stringArray.sort(byLastLetter);
 }
+lastLetterSort(fruit);
+
+assert((fruit[0] === sortedFruit[0] && fruit[1] === sortedFruit[1] && fruit[2] === sortedFruit[2]),
+  'The order of fruits should be banana, apple, cherry');
+
+var sum;
+var numArrOne = [5, 2, 8, 0, 1.5, -4]
+// should sum to: 12.5
 
 function sumArray(numberArray) {
   var sum = 0;
+  numberArray.forEach(function(e,i,a) {
+    sum = sum + a[i]
+  });
   // TODO: implement me using forEach
   return sum;
 }
 
+assert(sumArray(numArrOne) === 12.5,
+  'The sum of the array should be 12.5');
+
+var numArrTwo = [3, 9, 2, 900];
+var numberArrays = [numArrTwo, numArrOne];
+var firstArr= [];
+
 function sumSort(arrayOfArrays) {
   arrayOfArrays.sort(function(item) {
+    if (sumArray(numberArrays[0]) < sumArray(numberArrays[1])) {
+      return -1;
+    } else if (sumArray(numberArrays[0]) > sumArray(numberArrays[1])) {
+      return 1;
+    } else {
+      return 0;
+    }
     // TODO: implement me using sumArray
     //  order the arrays based on the sum of the numbers
     //  inside each array
   });
+  firstArr = numberArrays[0];
 }
+sumSort(numberArrays);
+
+assert((firstArr[0] === 5 && firstArr[1] === 2 && firstArr[2] === 8 && firstArr[3] === 0 && firstArr[4] === 1.5 && firstArr[5] === -4),
+  'First array does not match');
 
 //*********************************************************
 // PROBLEM 4: Cleanup: 10 points
