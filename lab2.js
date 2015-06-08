@@ -50,7 +50,6 @@ function assert(expression, failureMessage) {
  with Dowington.
 */
 
-
 function Blob() {}
 var blob = new Blob();
 var populace = 1000;
@@ -60,9 +59,9 @@ while (populace > 0) {
   hour++;
   rate = (1 * hour);
   populace = populace - (rate);
-}  
+}
 
-var hoursSpentInDowington = hour; 
+var hoursSpentInDowington = hour;
                            // TODO: assign me the value of the
                            // above calculation (how long it took
                            // the blob to eat Dowington)
@@ -71,22 +70,13 @@ var hoursSpentInDowington = hour;
 // town, and the starting consumption rate, and returns the number
 // of hours the blob needs to ooze its way through that town.
 
-function hoursToOoze(population, peoplePerHour) {
-    hour = 0;
-    while (population > 0) {
-      hour++;
-      rate = (peoplePerHour * hour);
-      population = population - (rate);
-    } 
-  };
-
 Blob.prototype.hoursToOoze = function(population, peoplePerHour) {
   hour = 0;
-    while (population > 0) {
-      hour++;
-      rate = (peoplePerHour * hour);
-      population = population - (rate);
-    } 
+  while (population > 0) {
+    hour++;
+    rate = (peoplePerHour * hour);
+    population = population - (rate);
+  }
   return hour;
 };
 
@@ -107,7 +97,6 @@ assert(blob.hoursToOoze(1000, 2) === 32,
 assert(blob.hoursToOoze(10000, 5) === 63,
   'hoursToOoze\'s result for 10,000 people and a consumption rate of 5 should equal 63 hours');
 
-
 //*********************************************************
 // PROBLEM 2: Universal Translator. 20 points
 //*********************************************************
@@ -123,7 +112,7 @@ var hello = {
 // speak, and method (that you'll place on the prototype) called
 // sayHello.
 
-function SentientBeing (homePlanet, language) {
+function SentientBeing(homePlanet, language) {
   this.homePlanet = homePlanet;
   this.language = language;
   // TODO: specify a home planet and a language
@@ -133,7 +122,7 @@ function SentientBeing (homePlanet, language) {
 // sb is a SentientBeing object
 
 // Many thanks to Michael and Shawn for posting their code to GitHub and giving me the clue I needed to get the syntax correct!
-SentientBeing.prototype.sayHello = function (sb) {
+SentientBeing.prototype.sayHello = function(sb) {
   if (sb.language === 'klingon') {
     console.log(hello[this.language]);
     return hello.klingon;
@@ -153,7 +142,7 @@ SentientBeing.prototype.sayHello = function (sb) {
     // to do the translating
 
     //TODO: put this on the SentientBeing prototype
-}
+};
 
 // TODO: create three subclasses of SentientBeing, one for each
 // species above (Klingon, Human, Romulan).
@@ -196,7 +185,7 @@ function lastLetterSort(stringArray) {
   function byLastLetter(a, b) {
     if (a.slice(-1) < b.slice(-1)) {
       return -1;
-    } else if (a.slice(-1) > b.slice(-1)){
+    } else if (a.slice(-1) > b.slice(-1)) {
       return 1;
     } else {
       return 0;
@@ -217,14 +206,13 @@ lastLetterSort(fruit);
 assert((fruit[0] === sortedFruit[0] && fruit[1] === sortedFruit[1] && fruit[2] === sortedFruit[2]),
   'The order of fruits should be banana, apple, cherry');
 
-var sum;
-var numArrOne = [5, 2, 8, 0, 1.5, -4]
+var numArrOne = [5, 2, 8, 0, 1.5, -4];
 // should sum to: 12.5
 
 function sumArray(numberArray) {
   var sum = 0;
-  numberArray.forEach(function(e,i,a) {
-    sum = sum + a[i]
+  numberArray.forEach(function(e, i, a) {
+    sum = sum + a[i];
   });
   // TODO: implement me using forEach
   return sum;
@@ -235,10 +223,10 @@ assert(sumArray(numArrOne) === 12.5,
 
 var numArrTwo = [3, 9, 2, 900];
 var numberArrays = [numArrTwo, numArrOne];
-var firstArr= [];
+var firstArr = [];
 
 function sumSort(arrayOfArrays) {
-  arrayOfArrays.sort(function(item) {
+  arrayOfArrays.sort(function() {
     if (sumArray(numberArrays[0]) < sumArray(numberArrays[1])) {
       return -1;
     } else if (sumArray(numberArrays[0]) > sumArray(numberArrays[1])) {
