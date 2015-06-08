@@ -49,21 +49,20 @@ function assert(expression, failureMessage) {
  TODO: Then, use a loop to calculate how long it took the blob to finish
  with Dowington.
 */
-var pop = 1000;
-var h = 1;
-function Blob() {
-  this.munchies = function() {
-    pop = pop - ((1 * h) / 1);
-    return h;
-  }
-}
-var blob = new Blob;
 
-for (var h = 1; pop > 0; h++) {
-  blob.munchies();
-}
 
-var hoursSpentInDowington = h - 1; 
+function Blob() {}
+var blob = new Blob();
+var populace = 1000;
+var hour = 0;
+var rate;
+while (populace > 0) {
+  hour++;
+  rate = (1 * hour);
+  populace = populace - (rate);
+}  
+
+var hoursSpentInDowington = hour; 
                            // TODO: assign me the value of the
                            // above calculation (how long it took
                            // the blob to eat Dowington)
@@ -72,12 +71,25 @@ var hoursSpentInDowington = h - 1;
 // town, and the starting consumption rate, and returns the number
 // of hours the blob needs to ooze its way through that town.
 
-Blob.prototype.hoursToOoze = function (population, peoplePerHour) {
-    for (var h = 1; population > 0; h++) {
-      population = population - ((peoplePerHour * h) / peoplePerHour);
-    }
-    return h - 1;
+function hoursToOoze(population, peoplePerHour) {
+    hour = 0;
+    while (population > 0) {
+      hour++;
+      rate = (peoplePerHour * hour);
+      population = population - (rate);
+    } 
   };
+
+Blob.prototype.hoursToOoze = function(population, peoplePerHour) {
+  hour = 0;
+    while (population > 0) {
+      hour++;
+      rate = (peoplePerHour * hour);
+      population = population - (rate);
+    } 
+  return hour;
+};
+
   // TODO: implement me based on the instructions above.
   // Be sure to then assign me to the Blob's prototype.
 
@@ -88,9 +100,12 @@ assert(blob.hoursToOoze(1000, 1) === hoursSpentInDowington,
 // TODO: write three more assertions like the two above, testing out
 // the hoursToOoze method.
 
-
-assert(blob.hoursToOoze(10000, 1) === 141, 'Population of 10000 and consumption rate of 1 additional per hour should take 141 days to be eaten.');
-assert(blob.hoursToOoze(100000, 1) === 447, 'Population of 100000 and consumption rate of 1 additional per hour should take 447 days to be eaten.');
+assert(blob.hoursToOoze(3000, 1) === 77,
+  'hoursToOoze\'s result for 3000 people and a consumption rate of 1 should equal 77 hours');
+assert(blob.hoursToOoze(1000, 2) === 32,
+  'hoursToOoze\'s result for 1000 people and a consumption rate of 2 should equal 32 hours');
+assert(blob.hoursToOoze(10000, 5) === 63,
+  'hoursToOoze\'s result for 10,000 people and a consumption rate of 5 should equal 63 hours');
 
 
 //*********************************************************
