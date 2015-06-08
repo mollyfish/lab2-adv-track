@@ -49,8 +49,22 @@ function assert(expression, failureMessage) {
  TODO: Then, use a loop to calculate how long it took the blob to finish
  with Dowington.
 */
+var pop = 1000;
+var h = 1;
+function Blob() {
+  this.munchies = function() {
+    pop = pop - ((1 * h) / 1);
+    return h;
+  }
+}
+var blob = new Blob;
 
-var hoursSpentInDowington; // TODO: assign me the value of the
+for (var h = 1; pop > 0; h++) {
+  blob.munchies();
+}
+
+var hoursSpentInDowington = h - 1; 
+                           // TODO: assign me the value of the
                            // above calculation (how long it took
                            // the blob to eat Dowington)
 
@@ -58,10 +72,14 @@ var hoursSpentInDowington; // TODO: assign me the value of the
 // town, and the starting consumption rate, and returns the number
 // of hours the blob needs to ooze its way through that town.
 
-function hoursToOoze(population, peoplePerHour) {
+Blob.prototype.hoursToOoze = function (population, peoplePerHour) {
+    for (var h = 1; population > 0; h++) {
+      population = population - ((peoplePerHour * h) / peoplePerHour);
+    }
+    return h - 1;
+  };
   // TODO: implement me based on the instructions above.
   // Be sure to then assign me to the Blob's prototype.
-}
 
 assert(blob.hoursToOoze(0, 1) === 0, 'no people means no time needed.');
 assert(blob.hoursToOoze(1000, 1) === hoursSpentInDowington,
@@ -69,6 +87,11 @@ assert(blob.hoursToOoze(1000, 1) === hoursSpentInDowington,
 
 // TODO: write three more assertions like the two above, testing out
 // the hoursToOoze method.
+
+
+assert(blob.hoursToOoze(10000, 1) === 141, 'Population of 10000 and consumption rate of 1 additional per hour should take 141 days to be eaten.');
+assert(blob.hoursToOoze(100000, 1) === 447, 'Population of 100000 and consumption rate of 1 additional per hour should take 447 days to be eaten.');
+
 
 //*********************************************************
 // PROBLEM 2: Universal Translator. 20 points
@@ -85,13 +108,29 @@ var hello = {
 // speak, and method (that you'll place on the prototype) called
 // sayHello.
 
-function SentientBeing () {
+function SentientBeing (homePlanet, language) {
+  this.homePlanet = homePlanet;
+  this.language = language;
   // TODO: specify a home planet and a language
   // you'll need to add parameters to this constructor
 }
 
 // sb is a SentientBeing object
-function sayHello (sb) {
+
+// Many thanks to Michael and Shawn for posting their code to GitHub and giving me the clue I needed to get the syntax correct!
+SentientBeing.prototype.sayHello = function (sb) {
+  if (sb.language === 'klingon') {
+    console.log(hello[this.language]);
+    return hello.klingon;
+  }
+  if (sb.language == 'romulan') {
+    console.log(hello[this.language]);
+    return hello.romulan;
+  }
+  if (sb.language == 'federation standard') {
+    console.log(hello[this.language]);
+    return hello['federation standard'];
+  }
     // TODO: say hello prints out (console.log's) hello in the
     // language of the speaker, but returns it in the language
     // of the listener (the sb parameter above).
@@ -99,16 +138,33 @@ function sayHello (sb) {
     // to do the translating
 
     //TODO: put this on the SentientBeing prototype
-  }
+}
 
 // TODO: create three subclasses of SentientBeing, one for each
 // species above (Klingon, Human, Romulan).
+
+function Klingon() {}
+Klingon.prototype = new SentientBeing('Qo\'noS', 'klingon');
+function Human() {}
+Human.prototype = new SentientBeing('Earth', 'federation standard');
+function Romulan() {}
+Romulan.prototype = new SentientBeing('Romulus', 'romulan');
 
 assert((new Human()).sayHello(new Klingon()) === 'nuqneH',
   'the klingon should hear nuqneH');
 
 // TODO: write five more assertions, to complete all the possible
 // greetings between the three types of sentient beings you created above.
+assert((new Human()).sayHello(new Romulan()) === 'Jolan\'tru',
+  'the romulan should hear Jolan\'tru');
+assert((new Romulan()).sayHello(new Klingon()) === 'nuqneH',
+  'the klingon should hear nuqneH');
+assert((new Romulan()).sayHello(new Human()) === 'hello',
+  'the human should hear hello');
+assert((new Klingon()).sayHello(new Human()) === 'hello',
+  'the human should hear hello');
+assert((new Klingon()).sayHello(new Romulan()) === 'Jolan\'tru',
+  'the romulan should hear Jolan\'tru');
 
 //*********************************************************
 // PROBLEM 3: Sorting. 20 points.
