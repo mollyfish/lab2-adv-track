@@ -205,6 +205,8 @@ lastLetterSort(fruit);
 
 assert((fruit[0] === sortedFruit[0] && fruit[1] === sortedFruit[1] && fruit[2] === sortedFruit[2]),
   'The order of fruits should be banana, apple, cherry');
+assert((fruit[0] === 'banana' && fruit[1] === 'apple' && fruit[2] === 'cherry'),
+  'The order of fruits should be banana, apple, cherry');
 
 var numArrOne = [5, 2, 8, 0, 1.5, -4];
 // should sum to: 12.5
@@ -220,10 +222,13 @@ function sumArray(numberArray) {
 
 assert(sumArray(numArrOne) === 12.5,
   'The sum of the array should be 12.5');
+assert(sumArray(numArrOne) === (5 + 2 + 8 + 0 + 1.5 + -4),
+  'The sum of the array should be 12.5');
 
 var numArrTwo = [3, 9, 2, 900];
 var numberArrays = [numArrTwo, numArrOne];
 var firstArr = [];
+var secondArr = [];
 
 function sumSort(arrayOfArrays) {
   arrayOfArrays.sort(function() {
@@ -239,11 +244,14 @@ function sumSort(arrayOfArrays) {
     //  inside each array
   });
   firstArr = numberArrays[0];
+  secondArr = numberArrays[1];
 }
 sumSort(numberArrays);
 
 assert((firstArr[0] === 5 && firstArr[1] === 2 && firstArr[2] === 8 && firstArr[3] === 0 && firstArr[4] === 1.5 && firstArr[5] === -4),
   'First array does not match');
+assert((secondArr[0] === 3 && secondArr[1] === 9 && secondArr[2] === 2 && secondArr[3] === 900),
+  'Second array does not match');
 
 //*********************************************************
 // PROBLEM 4: Cleanup: 10 points
